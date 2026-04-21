@@ -11,22 +11,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import it.marconirovereto.demo_musica.entity.Album;
 import it.marconirovereto.demo_musica.repository.AlbumRepository;
 
 @RestController
 @RequestMapping("/api/albums")
+@Tag(name = "Albums", description = "Gestione raccolta album musicali")
 public class AlbumController {
     @Autowired
     private AlbumRepository albumRepository;
 
     
     @GetMapping("/all")
+	@Operation(
+		summary = "Ritorna tutti gli album",
+		description = "Lista di tutti gli albums presenti nel DB"
+	)
 	public List<Album> getAllAlbum() {
 		return albumRepository.findAll();
 	}
 	
 	@GetMapping("/id/{id}")
+	@Operation(
+		summary = "Album by id",
+		description = "Restituisce l'album dato il suo id (se presente)"
+	)
 	public Optional<Album> getAlbumById(@PathVariable int id) {
 		Optional<Album> x = albumRepository.findById(id);
 		if (x.isPresent())
