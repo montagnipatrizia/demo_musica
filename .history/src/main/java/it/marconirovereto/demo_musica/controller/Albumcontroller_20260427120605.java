@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import it.marconirovereto.demo_musica.entity.Album;
+import it.marconirovereto.demo_musica.repository.AlbumRepository;
 import it.marconirovereto.demo_musica.service.AlbumService;
 
 @RestController
@@ -30,7 +31,7 @@ public class AlbumController {
 		description = "Lista di tutti gli albums presenti nel DB"
 	)
 	public List<Album> getAllAlbum() {
-		return albumService.findAll();
+		return albumService.getAllAlbum();
 	}
 	
 	@GetMapping("/id/{id}")

@@ -2,7 +2,6 @@ package it.marconirovereto.demo_musica.service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,20 +40,6 @@ public class AlbumService {
    }
 
    @Transactional (readOnly = true)
-   public List<Album> findAll(){
-      return albumRepository.findAll();
-   }
-
-   @Transactional (readOnly = true)
-   public Optional<Album> findById(int id){
-      Optional<Album> x = albumRepository.findById(id);
-		if (x.isPresent())
-            return x;
-		else 
-			return null;
-   }
-
-   @Transactional (readOnly = true)
    public List<Album> findByArtista(String artista){
       return albumRepository.findByArtista(artista);
    }
@@ -64,15 +49,10 @@ public class AlbumService {
       return albumRepository.findByAnnoPubblicazione(anno);   
    }
 
+
    @Transactional (readOnly = true)
    public List<Album> findByAnnoPubblicazioneDaA(int annoda, int annoa){
-      return albumRepository.findByAnnoPubblicazioneDaA(annoda, annoa);   
+      return albumRepository.findByAnnoPubblicazione(annoda);   
    }
-
-   @Transactional (readOnly = true)
-   public List<Album> findByTitolo(String titolo){
-      return albumRepository.findByTitolo(titolo);   
-   }
-
 
 }

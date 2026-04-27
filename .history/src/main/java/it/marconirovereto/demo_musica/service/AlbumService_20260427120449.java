@@ -40,11 +40,7 @@ public class AlbumService {
       return albumRepository.save(album);
    }
 
-   @Transactional (readOnly = true)
-   public List<Album> findAll(){
-      return albumRepository.findAll();
-   }
-
+   
    @Transactional (readOnly = true)
    public Optional<Album> findById(int id){
       Optional<Album> x = albumRepository.findById(id);

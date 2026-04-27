@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import it.marconirovereto.demo_musica.entity.Album;
+import it.marconirovereto.demo_musica.repository.AlbumRepository;
 import it.marconirovereto.demo_musica.service.AlbumService;
 
 @RestController
@@ -39,7 +40,7 @@ public class AlbumController {
 		description = "Restituisce l'album dato il suo id (se presente)"
 	)
 	public Optional<Album> getAlbumById(@PathVariable int id) {
-		return albumService.findById(id);
+		return albumService.
 	}
 
 	@GetMapping("/artista/{artista}")

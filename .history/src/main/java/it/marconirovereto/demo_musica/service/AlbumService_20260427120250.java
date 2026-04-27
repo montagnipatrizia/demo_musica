@@ -41,13 +41,8 @@ public class AlbumService {
    }
 
    @Transactional (readOnly = true)
-   public List<Album> findAll(){
-      return albumRepository.findAll();
-   }
-
-   @Transactional (readOnly = true)
    public Optional<Album> findById(int id){
-      Optional<Album> x = albumRepository.findById(id);
+      Optional<Album> x = albumService.findById(id);
 		if (x.isPresent())
             return x;
 		else 

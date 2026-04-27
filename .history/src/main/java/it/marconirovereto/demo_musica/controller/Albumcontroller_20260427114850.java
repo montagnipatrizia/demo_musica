@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import it.marconirovereto.demo_musica.entity.Album;
+import it.marconirovereto.demo_musica.repository.AlbumRepository;
 import it.marconirovereto.demo_musica.service.AlbumService;
 
 @RestController
@@ -39,7 +40,11 @@ public class AlbumController {
 		description = "Restituisce l'album dato il suo id (se presente)"
 	)
 	public Optional<Album> getAlbumById(@PathVariable int id) {
-		return albumService.findById(id);
+		Optional<Album> x = albumService.findById(id);
+		if (x.isPresent())
+            return x;
+		else 
+			return null;
 	}
 
 	@GetMapping("/artista/{artista}")
@@ -49,22 +54,22 @@ public class AlbumController {
 	
 	@GetMapping("/anno/{anno}")
 	public List<Album> getAlbumByAnnoPubblicazione(@PathVariable int anno) {
-		return albumService.findByAnnoPubblicazione(anno);
+		return albumRepository.findByAnnoPubblicazione(anno);
 	}
 	
 	@GetMapping("/intervallo/{annoda}/{annoa}")
 	public List<Album> getAlbumByAnnoPubblicazioneDaA(@PathVariable int annoda, @PathVariable int annoa) {
-		return albumService.findByAnnoPubblicazioneDaA(annoda, annoa);
+		return albumRepository.findByAnnoPubblicazioneDaA(annoda, annoa);
 	}
 
 	@GetMapping("/titolo/{titolo}")
 	public List<Album> getAlbumByTitolo(@PathVariable String titolo) {
-		return albumService.findByTitolo(titolo);
+		return albumRepository.findByTitolo(titolo);
 	}
 	
 	@PostMapping("/save")
 	public String postAlbumSave(@RequestBody Album album) {
-		albumService.salvaNuovoAlbum(album);
+		albumRepository.save(album);
 		return "Inserimento avvenuto con successo";
 	}
 	

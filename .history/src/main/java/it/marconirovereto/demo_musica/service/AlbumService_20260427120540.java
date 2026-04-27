@@ -42,7 +42,7 @@ public class AlbumService {
 
    @Transactional (readOnly = true)
    public List<Album> findAll(){
-      return albumRepository.findAll();
+      return albumRepository.findAll()
    }
 
    @Transactional (readOnly = true)
